@@ -33,8 +33,8 @@ int		trainingEpochs	= 1e+6;
 double	epsilon			= 1e-1; /* Used to calculate derivative */
 
 /**
- * This returns the dot product of theta and input, it expects x[1..n];
- * automatically assumes x_0 to be 1.
+ * This returns the dot product of theta and input, it expects x to be an array
+ * of inputs without the synthetic x_0 = 1.
  */
 double
 infer(const double *theta, double *input)
@@ -64,7 +64,9 @@ loss(const double *theta)
 	return loss;
 }
 
-// Partial derivative of the loss function (MSE) with respect to theta[i];
+/**
+ * Partial derivative of the loss function (MSE) with respect to theta[i];
+ */
 double
 loss_pd_wrt(const double *theta, int i) 
 {
@@ -85,19 +87,9 @@ loss_pd_wrt(const double *theta, int i)
 	return (forward - backward)/2 * epsilon;
 }
 
-bool
-hasConverged(double *theta)
-{
-	static double lastLoss = INFINITY;
-	double newLoss = loss(theta);
-	if (newLoss <= lastLoss)
-	{
-		lastLoss = newLoss;
-		return false;
-	}
-	return true;
-}
-
+/**
+ * Stochastic gradient descent of the MSE loss function
+ */
 void
 trainModel(double *theta)
 {
