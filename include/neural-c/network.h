@@ -5,6 +5,8 @@ typedef struct {
         size_t         layer_count;
 } neural_network_t;
 
-double *forward(const neural_network_t *net, double *input);
+neural_network_t neural_network_new(const neuron_layer_t* layers, size_t layer_count);
 
-void train(neural_network_t *net);
+double *neural_network_forward(const neural_network_t *net, double *input);
+
+void neural_network_train(neural_network_t *net);
