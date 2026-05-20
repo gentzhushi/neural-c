@@ -1,6 +1,9 @@
 #include "./vector.h"
 
-typedef vector_t* matrix_t;
+typedef struct {
+        vector_t vectors;
+        size_t   vector_count;
+} matrix_t;
 
 matrix_t matrix_new(size_t x, size_t y);
 

@@ -1,11 +1,14 @@
 #include <stddef.h>
 
-typedef double* vector_t;
+typedef struct {
+        double *data;
+        double count;
+} vector_t;
 
 /**
  * Create a new empty vector of a specified size
  */
-vector_t vector_new(size_t init_capacity);
+vector_t *vector_new(size_t init_capacity);
 
 /**
  * Calculate and return the scalar (dot) product of 2 vectors
